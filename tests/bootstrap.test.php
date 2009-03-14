@@ -20,7 +20,7 @@
 	{
 		should_return('/foo', when_passed('foo'));
 		should_return('/foo', when_passed('/foo'));
-		should_return('/foo bar', when_passed('/foo%20bar'));
+		should_return('/foo bar', when_passed('/foo bar'));
 	}
 
 
