@@ -15,7 +15,8 @@
 
 	function test_extract_request_headers_()
 	{
-		should_return(array('content-type'=>'text/plain'), when_passed(array('HTTP_CONTENT_TYPE'=>'text/plain')));
+		should_return(array('content-type'=>'text/plain', 'content-length'=>0),
+		              when_passed(array('HTTP_CONTENT_TYPE'=>'text/plain', 'HTTP_CONTENT_LENGTH'=>0)));
 		should_return(array(), when_passed(array('CONTENT-TYPE'=>'text/plain')));
 	}
 
