@@ -32,7 +32,7 @@
 	}
 
 
-		function test_remove_path_hacks()
+		function test_remove_path_hacks_()
 		{
 			should_return(array(), when_passed(array('path_'=>'/foo')));
 		}
@@ -86,7 +86,7 @@ HTML;
             should_return($html);
         }
         
-        function test_inertia_404_not_found()
+        function test_inertia_404_not_found_()
         {
             $uri = '/foo';
 $html=<<<HTML
@@ -103,7 +103,7 @@ HTML;
             should_return($html, when_passed($uri));
         }
         
-        function test_minimal_html()
+        function test_minimal_html_()
         {
             $title = 'Hello';
             $content = 'Hello World';

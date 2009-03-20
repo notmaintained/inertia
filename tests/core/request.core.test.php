@@ -179,7 +179,7 @@
                 file_put_contents(handler_basedir_().$handler.DIRECTORY_SEPARATOR."$handler.handler.php", '<?php function '.$handler.'_handler($method, $path, $query, $headers, $body) {} ?>');
             }
         
-        function test_prepend_path_with_slash()
+        function test_prepend_path_with_slash_()
         {
             should_return('/foo', when_passed('/foo'));
             should_return('/foo', when_passed('/foo'));

@@ -169,7 +169,7 @@
 	function request_($handler, $method, $path, $query, $headers, $body=NULL)
 	{
 		$referer = calling_handler_(debug_backtrace());
-        $path = prepend_path_with_slash($path);
+        $path = prepend_path_with_slash_($path);
 
 		$headers = array_change_key_case($headers, CASE_LOWER);
 		$headers = x_inertia_headers_($referer, $method, $headers, $body);
@@ -227,11 +227,11 @@
 				return call_user_func_array("{$wrapper}_request_", $params);
 			}
 
-        function prepend_path_with_slash($path)
+        function prepend_path_with_slash_($path)
         {
             if (is_array($path))
             {
-                $path[1] = prepend_path_with_slash($path[1]);
+                $path[1] = prepend_path_with_slash_($path[1]);
                 return $path;
             }
             else return '/'.ltrim($path, '/');

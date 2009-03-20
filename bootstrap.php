@@ -88,7 +88,7 @@
 
 	function bootstrap_inertia_($method, $path, $query, $headers, $body)
 	{
-		$query = remove_path_hacks($query);
+		$query = remove_path_hacks_($query);
 
 		if (handler_exists_(INERTIA_BOOTSTRAP_HANDLER))
 		{
@@ -99,7 +99,7 @@
             return inertia_default_response_($path, inertia_relative_uri_($path));
         }
 	}
-		function remove_path_hacks($query)
+		function remove_path_hacks_($query)
 		{
 			if (isset($query['path_']))
 			{
@@ -117,7 +117,7 @@
             }
             else
             {
-                return response_(STATUS_NOT_FOUND, array('content-type'=>'text/html'), inertia_404_not_found($relative_uri));
+                return response_(STATUS_NOT_FOUND, array('content-type'=>'text/html'), inertia_404_not_found_($relative_uri));
             }
         }
 
@@ -127,17 +127,17 @@
             $content = "<h1>$title</h1>\n<p>If you can see this page, it means that "
                        ."the installation of <a href=\"http://inertia.sourceforge.net/\">Inertia</a> "
                        ."on this system was successful.</p>";
-            return minimal_html($title, $content);
+            return minimal_html_($title, $content);
         }
         
-        function inertia_404_not_found($relative_uri)
+        function inertia_404_not_found_($relative_uri)
         {
             $title = '404 Not Found';
             $content = "<h1>Not Found</h1>\n<p>The requested URL $relative_uri"
                        ." was not found on this server.</p>";
-            return minimal_html($title, $content);
+            return minimal_html_($title, $content);
         }
-            function minimal_html($title, $content)
+            function minimal_html_($title, $content)
             {
                 return "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
 			           ."<html>\n<head>\n<title>$title</title>\n</head>\n<body>\n$content\n</body>\n</html>";
