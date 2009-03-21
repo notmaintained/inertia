@@ -163,6 +163,13 @@
 		return $response;
 	}
 
+		function response_is_valid_($response)
+		{
+			return (is_array($response)
+			       and array_keys_exists_(array('status_code', 'headers', 'body'), $response)
+			       and is_array($response['headers']));
+		}
+
 
 	function flush_response_($response)
 	{
@@ -174,6 +181,7 @@
 
 		function prepare_external_response_($response)
 		{
+			assert(array_key_exists('content-type', $response['headers']));
             $content_type_exists = array_key_exists('content-type', $response['headers']);
             $is_php_value = is_equal_($response['headers']['content-type'], 'application/x-php-value');
 
@@ -192,7 +200,7 @@
             
 			return $response;
 		}
-        
+
         function flush_http_status_($status_code)
         {
 			$reason_phrase = response_reason_phrase_($status_code);
@@ -205,12 +213,6 @@
 			{
 				header("$field_name: $field_value");
 			}
-		}
-
-
-		function response_is_valid_($response)
-		{
-			return (is_array($response) and array_keys_exists_(array('status_code', 'headers', 'body'), $response) and is_array($response['headers']));
 		}
 
 ?>

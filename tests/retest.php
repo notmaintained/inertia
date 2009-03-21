@@ -2,8 +2,6 @@
 
 /* retest.php
  *
- * test REpeatedly, REfreshes automatically. RedGreenRefactor
- *
  * function email($str){return preg_replace('/^(.*)\/(.*)/', '$2@$1', $str);}
  * Authors: Sandeep Shetty email('gmail.com/sandeep.shetty')
  *

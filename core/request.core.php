@@ -45,127 +45,6 @@
 			}
 
 
-	function calling_handler_($backtrace)
-	{
-		foreach ($backtrace as $function_call)
-		{
-			if (preg_match('/^(\w+)_handler$/', $function_call['function'])/* and handler_exists_($matches[1])*/)
-			{
-				return preg_replace('/^(\w+)_handler$/', '\1', $function_call['function']);
-			}
-		}
-
-		return false;
-	}
-
-
-	function get_conf_($conf_var, $conf_file=false)
-	{
-        static $conf_vars;
-        
-        if (!$conf_file) return isset($conf_vars[$conf_var]) ? $conf_vars[$conf_var] : array();
-        
-		if (file_exists($conf_file))
-		{
-			require $conf_file;
-            if (isset($$conf_var))
-            {
-                return $conf_vars[$conf_var] = $$conf_var;
-            }
-            else
-            {
-                $conf_vars[$conf_var] = array();
-            }
-		}
-
-		return array();
-	}
-    
-    function proxies_conf_file_($handler_basedir)
-    {
-        return "{$handler_basedir}proxies.conf.php";
-    }
-
-
-    function aliases_conf_file_($handler_basedir)
-    {
-        return "{$handler_basedir}aliases.conf.php";
-    }
-
-
-	function resolve_alias_($handler, $aliases)
-	{
-        foreach ($aliases as $alias)
-        {
-            if (is_equal_($handler, $alias['name']))
-            {
-                return $alias['handler'];
-            }
-        }
-
-		return $handler;
-	}
-
-//TODO: Maybe this shud be broken up into smaller functions
-	function x_inertia_headers_($referer, $method, $headers, $body)
-	{
-		$headers['x-referer-handler'] = $referer;
-
-		if (array_key_exists('cookie', $headers))
-		{
-			$headers['x-cookie-vars'] = parse_parameters_($headers['cookie']);
-		}
-
-		if (payload_exists_($method, $body))
-		{
-			if (array_key_exists('content-type', $headers))
-			{
-				if (is_form_urlencoded_($headers['content-type']))
-				{
-					parse_str($body, $headers['x-form-vars']);
-				}
-			}
-		}
-
-		return $headers;
-	}
-
-        function payload_exists_($method, $body)
-        {
-            return (is_equal_(METHOD_POST, $method) or is_equal_(METHOD_PUT, $method)) and !empty($body);
-        }
-
-
-        function is_form_urlencoded_($content_type)
-        {
-            return is_equal_('application/x-www-form-urlencoded', $content_type);
-        }
-
-
-        function parse_parameters_($parameters)
-        {
-            $params = array();
-            if (!empty($parameters))
-            {
-                $pieces = explode(';', $parameters);
-                foreach ($pieces as $piece)
-                {
-                    if (str_contains_('=', $piece))
-                    {
-                        list($key, $value) = explode('=', $piece);
-                        $params[trim(rawurldecode($key))] = trim(rawurldecode($value));
-                    }
-                    else
-                    {
-                        $params[] = trim(rawurldecode($piece));
-                    }
-                }
-            }
-
-            return $params;
-        }
-
-
 	function request_($handler, $method, $path, $query, $headers, $body=NULL)
 	{
 		$referer = calling_handler_(debug_backtrace());
@@ -183,11 +62,123 @@
         return dispatch_request_($handler, $method, $path, $query, $headers, $body);
 	}
 
-        function is_proxy_request_($path)
+
+		function calling_handler_($backtrace)
+		{
+			foreach ($backtrace as $function_call)
+			{
+				if (preg_match('/^(\w+)_handler$/', $function_call['function'])/* and handler_exists_($matches[1])*/)
+				{
+					return preg_replace('/^(\w+)_handler$/', '\1', $function_call['function']);
+				}
+			}
+
+			return false;
+		}
+
+
+        function prepend_path_with_slash_($path)
         {
-            return (is_array($path) and is_equal_(count($path), 2)); 
+            if (is_array($path))
+            {
+                $path[1] = prepend_path_with_slash_($path[1]);
+                return $path;
+            }
+            else return '/'.ltrim($path, '/');
         }
-        
+
+
+		//TODO: Maybe this shud be broken up into smaller functions
+		function x_inertia_headers_($referer, $method, $headers, $body)
+		{
+			$headers['x-referer-handler'] = $referer;
+
+			if (array_key_exists('cookie', $headers))
+			{
+				$headers['x-cookie-vars'] = parse_parameters_($headers['cookie']);
+			}
+
+			if (payload_exists_($method, $body))
+			{
+				if (array_key_exists('content-type', $headers))
+				{
+					if (is_form_urlencoded_($headers['content-type']))
+					{
+						parse_str($body, $headers['x-form-vars']);
+					}
+				}
+			}
+
+			return $headers;
+		}
+
+			function parse_parameters_($parameters)
+			{
+				$params = array();
+				if (!empty($parameters))
+				{
+					$pieces = explode(';', $parameters);
+					foreach ($pieces as $piece)
+					{
+						if (str_contains_('=', $piece))
+						{
+							list($key, $value) = explode('=', $piece);
+							$params[trim(rawurldecode($key))] = trim(rawurldecode($value));
+						}
+						else
+						{
+							$params[] = trim(rawurldecode($piece));
+						}
+					}
+				}
+
+				return $params;
+			}
+
+			function payload_exists_($method, $body)
+			{
+				return (is_equal_(METHOD_POST, $method) or is_equal_(METHOD_PUT, $method)) and !empty($body);
+			}
+
+			function is_form_urlencoded_($content_type)
+			{
+				return is_equal_('application/x-www-form-urlencoded', $content_type);
+			}
+
+
+		function get_conf_($conf_var, $conf_file=false)
+		{
+			static $conf_vars;
+			
+			if (!$conf_file) return isset($conf_vars[$conf_var]) ? $conf_vars[$conf_var] : array();
+			
+			if (file_exists($conf_file))
+			{
+				require $conf_file;
+				if (isset($$conf_var))
+				{
+					return $conf_vars[$conf_var] = $$conf_var;
+				}
+				else
+				{
+					$conf_vars[$conf_var] = array();
+				}
+			}
+
+			return array();
+		}
+
+		function proxies_conf_file_($handler_basedir)
+		{
+			return "{$handler_basedir}proxies.conf.php";
+		}
+
+		function aliases_conf_file_($handler_basedir)
+		{
+			return "{$handler_basedir}aliases.conf.php";
+		}
+
+
         function detect_proxy_($referer, $handler, $path, $proxies)
         {
 			foreach ($proxies as $proxy)
@@ -209,7 +200,26 @@
             
             return array($handler, $path);
         }
-        
+			function is_proxy_request_($path)
+			{
+				return (is_array($path) and is_equal_(count($path), 2)); 
+			}
+
+
+		function resolve_alias_($handler, $aliases)
+		{
+			foreach ($aliases as $alias)
+			{
+				if (is_equal_($handler, $alias['name']))
+				{
+					return $alias['handler'];
+				}
+			}
+
+			return $handler;
+		}
+
+
         function dispatch_request_($handler, $method, $path, $query, $headers, $body)
         {
 			$params = get_defined_vars();
@@ -217,25 +227,16 @@
 
 			if (str_contains_('://', $handler))
 			{
-				list($wrapper, ) = explode($handler);
+				list($wrapper, ) = explode('://', $handler);
 			}
 
-			return wrapper_request_($wrapper, $params);
+			$response = wrapper_request_($wrapper, $params);
+			return valid_response_($response);
         }
 			function wrapper_request_($wrapper, $params)
 			{
 				return call_user_func_array("{$wrapper}_request_", $params);
 			}
-
-        function prepend_path_with_slash_($path)
-        {
-            if (is_array($path))
-            {
-                $path[1] = prepend_path_with_slash_($path[1]);
-                return $path;
-            }
-            else return '/'.ltrim($path, '/');
-        }
 
 
 ?>

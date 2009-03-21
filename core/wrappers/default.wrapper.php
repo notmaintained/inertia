@@ -10,10 +10,10 @@
 			{
 				$params = array($method, $path, $query, $headers, $body);
 				$response = call_user_func_array($handler_function, $params);
-				return valid_response_($response);
+				return $response;
 			}
 		}
-
+		
 		return response_(STATUS_NOT_FOUND);
 	}
 
