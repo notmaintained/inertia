@@ -3,74 +3,204 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-	<title>sandeepshetty/inertia @ GitHub</title>
-	
+	<title> Inertia ROP</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="Inertia Resource-Oriented Programming (ROP) Platform" />
 	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #7dee96;
-		  font-family: "helvetica"; 
-  		color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-		h1 { font-size: 3.8em; color: #821169; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #821169; }
-    h3 { text-align: center; color: #821169; }
-    a { color: #821169; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
 	
+		html {
+			background-color: #181818;
+		}
+		
+		body, h1, h2, h3, h4, h5, h6, blockquote, p {
+			margin: 0;
+			padding: 0;
+		}
+		
+		body {
+			/*font-family: Arial, Helvetica, Georgia, Sans-Serif;*/
+			font-family: DejaVu Sans, Bitstream Vera Sans, Lucida Grande, Verdana, Helvetica, Arial, sans-serif;
+			font-size: 14px;
+			text-align: center;
+			vertical-align: top;
+			background: #fff;
+			color: #fff;
+		}
+		
+		h1, h2, h3, h4, h5, h6 {
+			font-family: Georgia, Sans-Serif;
+			font-size: 18px;
+			font-weight: normal;
+			/*border-bottom: 1px dotted #444444;*/
+		}
+		
+		#header {
+			clear: both;
+			float: left;
+			width: 100%;
+			padding: 30px 0 20px 0;
+			text-align: left;
+			background: #1f1f1f;
+		}
+
+		#header h1 {
+			margin: 0 auto;
+			width: 758px;
+			font-size: 48px;
+			color: #fff;
+		}
+
+		#header h1 a {
+			text-decoration: none;
+			color: #fff;
+		}
+
+		#header h1 a:hover {
+			text-decoration: underline;
+		}
+
+		.description {
+			margin: 0 auto;
+			width: 758px;
+			line-height: 24px;
+			color: #6d6d6d;
+			font: 2em georgia;
+		}
+
+		#top-menu {
+			clear: both;
+			float: left;
+			width: 100%;
+			font-family: Georgia, Sans-Serif;
+			text-align: left;
+			border-top: 1px solid #343434;
+			background: #343434 url(images/bg_topmenu.gif) repeat-x;
+		}
+
+		#top-menu a {
+			text-decoration: none;
+			color: #b3b2b2;
+		}
+
+		#top-menu a:hover {
+			text-decoration: underline;
+		}
+
+		#top-menu ul {
+			margin: 0 auto;
+			width: 758px;
+			padding: 10px 0;
+			text-align: left;
+		}
+
+		#top-menu ul li {
+			display: inline;
+			padding: 0 20px 0 0;
+			font-size: 18px;
+		}
+
+		#container {
+			clear: both;
+			float: left;
+			width: 100%;
+			text-align: left;
+			border-top: 1px solid #444;
+		}
+
+		#container a {
+			text-decoration: none;
+			border-bottom: 1px dotted #fff;
+			color: #fff;
+		}
+
+		.page {
+			margin: 20px auto 0;
+			width: 758px;
+			text-align: left;
+			line-height: 24px;
+		}
+
+		.page h2 {
+			font-size: 24px;
+			padding: 15px 0 10px 0;
+		}
+
+		.page p {
+			margin: 8px 0; 
+		}
+		pre {
+			width: 90%;
+			background: #000; color: #fff; padding: 15px;
+		}
+		
+		#footer-wrap {
+			float: left;
+			width: 100%;
+		}
+
+		#footer {
+			margin: 10px auto 0 auto;
+			width: 758px;
+			padding: 0 0 20px 0;
+			line-height: 24px;
+			text-align: left;
+			color: #999999;
+			font-size: 0.9em;
+		}
+		
+		#footer a {
+			color: #999;
+			text-decoration: none;
+			border-bottom: 1px dotted #999999
+		}
+
+
+	</style>
 </head>
 
 <body>
-  <a href="http://github.com/sandeepshetty/inertia"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-  
-  <div id="container">
 
-    <div class="download">
-      <a href="http://github.com/sandeepshetty/inertia/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/sandeepshetty/inertia/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
-      
-    <h1><a href="http://github.com/sandeepshetty/inertia">inertia</a> 
-      <span class="small">by <a href="http://github.com/sandeepshetty">sandeepshetty</a></small></h1>
+<div id="header">
+	<h1><a href='http://127.0.0.1/inertia-www-rewrite/' accesskey='1'>Inertia</a></h1>
+	<div class="description">Resource-Oriented Programming (ROP) Platform</div>
+</div>
 
-    <div class="description">
-      Inertia is a Resource-Oriented Programming (ROP) platform for building web applications and frameworks in <a href="http://php.net/">PHP</a> that provides a module level abstraction based on <a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">REST</a>.
-    </div>
 
-    
+<div id="top-menu">
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/sandeepshetty/inertia/zipball/master">zip</a> or
-      <a href="http://github.com/sandeepshetty/inertia/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/sandeepshetty/inertia</pre>
-    </p>
-      
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/sandeepshetty/inertia">sandeepshetty/inertia</a>
-    </div>
-    
-  </div>
+<ul>
+  <li><a href="http://wiki.github.com/sandeepshetty/inertia">Documentation</a></li>
+  <li><a href="http://groups.google.com/group/inertia-discuss/">Help</a></li>
+</ul>
+</div>
 
-  
+<div id="container">
+	<div class="page">		
+			
+			<h2>What is Inertia?</h2>
+			<p>Inertia is a Resource-Oriented Programming (ROP) platform for building web applications and frameworks in <a href="http://php.net/">PHP</a> that provides a module level abstraction based on <a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">REST</a>.</p>
+			
+			<p>Inertia is <a href="http://www.gnu.org/philosophy/free-sw.html">free software</a> and distributed under the terms of the <a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>.</p>
+			
+			<h2>Download: <a href="http://github.com/sandeepshetty/inertia/zipball/master">zip</a> / <a href="http://github.com/sandeepshetty/inertia/tarball/master">tar</a></h2>
+
+
+			<p>To clone with <a href="http://git-scm.com">Git</a> run: <pre>$ git clone git://github.com/sandeepshetty/inertia</pre></p>
+
+			<p>To fork or browse visit: <a href="http://github.com/sandeepshetty/inertia">http://github.com/sandeepshetty/inertia</a></p>
+
+	</div>
+</div>
+
+<div id="footer-wrap">
+
+	<div id="footer">
+		<p>Copyright (C) <a href='http://collaborationscience.com/'>Collaboration Science</a> since 2005. For corrections, questions and discussions use <a href='http://groups.google.com/group/inertia-discuss/'>inertia-discuss</a>.</p> 
+	</div>
+
+</div>
+
 </body>
 </html>
