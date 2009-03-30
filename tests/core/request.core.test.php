@@ -164,7 +164,7 @@
         function test_dispatch_request_()
         {
             $handler = 'testhandler'.rand();
-            should_return(response_(STATUS_NOT_FOUND),
+            should_return(valid_response_(response_(STATUS_NOT_FOUND)),
                           when_passed($handler, METHOD_GET, '/', array(), array(), ''));
                           
             testhelper_create_handler_($handler);

@@ -18,6 +18,9 @@
 		should_return(array('status_code' => 200,
 		                    'headers' => array('content-type' => 'text/plain'),
 		                    'body' => ''), when_passed(200, array('content-type' => 'text/plain')));
+		should_return(array('status_code' => 404,
+		                    'headers' => array(),
+		                    'body' => ''), when_passed(STATUS_NOT_FOUND));
 	}
 
 

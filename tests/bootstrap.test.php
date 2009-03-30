@@ -107,8 +107,8 @@ HTML;
         {
             $title = 'Hello';
             $content = 'Hello World';
-            $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
-                    ."<html>\n<head>\n<title>Hello</title>\n</head>\n<body>\nHello World\n</body>\n</html>";
+            $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\r\n"
+                    ."<html>\r\n<head>\r\n<title>Hello</title>\r\n</head>\r\n<body>\r\nHello World\r\n</body>\r\n</html>";
             should_return($html, when_passed($title, $content));
         }
 

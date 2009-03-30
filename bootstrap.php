@@ -124,7 +124,7 @@
         function inertia_test_page_()
         {
             $title = 'Inertia Test Page';
-            $content = "<h1>$title</h1>\n<p>If you can see this page, it means that "
+            $content = "<h1>$title</h1>\r\n<p>If you can see this page, it means that "
                        ."the installation of <a href=\"http://inertia.sourceforge.net/\">Inertia</a> "
                        ."on this system was successful.</p>";
             return minimal_html_($title, $content);
@@ -139,8 +139,8 @@
         }
             function minimal_html_($title, $content)
             {
-                return "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
-			           ."<html>\n<head>\n<title>$title</title>\n</head>\n<body>\n$content\n</body>\n</html>";
+                return "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\r\n"
+			           ."<html>\r\n<head>\r\n<title>$title</title>\r\n</head>\r\n<body>\r\n$content\r\n</body>\r\n</html>";
             }
 
 ?>
