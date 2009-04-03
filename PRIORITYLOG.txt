@@ -1,9 +1,0 @@
-Themes:
-
-* Retest
-** Clean up
-** Add agiledox features
-** HTTP support
-* HTTP support in request_
-
-

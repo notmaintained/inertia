@@ -8,7 +8,7 @@ based on REST[2].
 Inertia is free software[3] and distributed under the terms of the GNU General
 Public License[4].
 
-For more information visit http://wiki.github.com/sandeepshetty/inertia
+For more information visit http://sandeepshetty.github.com/inertia
 
 
 
