@@ -39,77 +39,39 @@
     
         function test_inertia_default_response_()
         {
-        $handler = 'testhandler'.rand();
-$html=<<<HTML
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html>
-<head>
-<title>Inertia Test Page</title>
-</head>
-<body>
-<h1>Inertia Test Page</h1>
-<p>If you can see this page, it means that the installation of <a href="http://inertia.sourceforge.net/">Inertia</a> on this system was successful.</p>
-</body>
-</html>
-HTML;
-		should_return(response_(STATUS_OK, array('content-type'=>'text/html'), $html), when_passed('/', ''));
+        	$handler = 'testhandler'.rand();
+            $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
+                    ."<html>\n<head>\n<title>Inertia Test Page</title>\n</head>\n<body>\n<h1>Inertia Test Page</h1>\n<p>If you can see this page, it means that the installation of <a href=\"http://inertia.sourceforge.net/\">Inertia</a> on this system was successful.</p>\n</body>\n</html>";
 
-$html=<<<HTML
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html>
-<head>
-<title>404 Not Found</title>
-</head>
-<body>
-<h1>Not Found</h1>\n<p>The requested URL /foo was not found on this server.</p>
-</body>
-</html>
-HTML;
-        should_return(response_(STATUS_NOT_FOUND, array('content-type'=>'text/html'), $html), when_passed('/foo', '/foo'));
+			should_return(response_(STATUS_OK, array('content-type'=>'text/html'), $html), when_passed('/', ''));
+
+
+            $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
+                    ."<html>\n<head>\n<title>404 Not Found</title>\n</head>\n<body>\n<h1>Not Found</h1>\n<p>The requested URL /foo was not found on this server.</p>\n</body>\n</html>";
+			should_return(response_(STATUS_NOT_FOUND, array('content-type'=>'text/html'), $html), when_passed('/foo', '/foo'));
         }
 
 
         function test_inertia_test_page_()
         {
-$html=<<<HTML
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html>
-<head>
-<title>Inertia Test Page</title>
-</head>
-<body>
-<h1>Inertia Test Page</h1>
-<p>If you can see this page, it means that the installation of <a href="http://inertia.sourceforge.net/">Inertia</a> on this system was successful.</p>
-</body>
-</html>
-HTML;
-            should_return($html);
+            $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
+                    ."<html>\n<head>\n<title>Inertia Test Page</title>\n</head>\n<body>\n<h1>Inertia Test Page</h1>\n<p>If you can see this page, it means that the installation of <a href=\"http://inertia.sourceforge.net/\">Inertia</a> on this system was successful.</p>\n</body>\n</html>";
+			should_return($html);
         }
         
         function test_inertia_404_not_found_()
         {
-            $uri = '/foo';
-$html=<<<HTML
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html>
-<head>
-<title>404 Not Found</title>
-</head>
-<body>
-<h1>Not Found</h1>\n<p>The requested URL $uri was not found on this server.</p>
-</body>
-</html>
-HTML;
-            should_return($html, when_passed($uri));
+            $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
+                    ."<html>\n<head>\n<title>404 Not Found</title>\n</head>\n<body>\n<h1>Not Found</h1>\n<p>The requested URL /foo was not found on this server.</p>\n</body>\n</html>";
+
+            should_return($html, when_passed('/foo'));
         }
         
         function test_minimal_html_()
         {
-            $title = 'Hello';
-            $content = 'Hello World';
-            $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\r\n"
-                    ."<html>\r\n<head>\r\n<title>Hello</title>\r\n</head>\r\n<body>\r\nHello World\r\n</body>\r\n</html>";
-            should_return($html, when_passed($title, $content));
+            $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
+                    ."<html>\n<head>\n<title>Hello</title>\n</head>\n<body>\nHello World\n</body>\n</html>";
+            should_return($html, when_passed('Hello', 'Hello World'));
         }
 
 ?>
