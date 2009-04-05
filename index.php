@@ -29,8 +29,6 @@
  */
 
 
-	define('INERTIA_VERSION', '0.3.0');
-
 	php_min_version_guard_('4.3.0');
 
 		function php_min_version_guard_($min_php_version)
