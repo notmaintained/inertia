@@ -33,8 +33,8 @@
 
 		function php_min_version_guard_($min_php_version)
 		{
-			$is_min_php_version = (function_exists('version_compare') and
-								   version_compare(PHP_VERSION,  $min_php_version, '>='));
+			$is_min_php_version = (function_exists('version_compare')
+			                       and version_compare(PHP_VERSION,  $min_php_version, '>='));
 
 			if (!$is_min_php_version)
 			{

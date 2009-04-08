@@ -32,56 +32,36 @@
 	require_webserver_adapter_(webserver_adapter_('default'));
 	require_webserver_adapter_(webserver_adapter_(INERTIA_WEB_SERVER));
 
-	function require_webserver_adapter_($webserver_adapter)
-	{
-		if (file_exists($webserver_adapter)) require_once $webserver_adapter;
-	}
 
-		function webserver_adapter_($webserver)
-		{//TODO: delete port line
-			return INERTIA_INSTALL_DIR.'core'.DIRECTORY_SEPARATOR.'adapters'.DIRECTORY_SEPARATOR.$webserver.'.adapter.php';
-		}
-
-
-	function webserver_($server_software)
-	{
-		/* Sandeep: PHP Platforms
-
-		   An entry must be made in $server_softwares to support a
-		   particular web server platform. Below you will find some of
-		   the platform I could find on the web.
-
-		   From php.net:
-		   Apache, Caudium, fhttpd, IIS/PWS, Netscape, iPlanet, SunONE,
-		   OmniHTTPd, Oreilly Website Pro, Sambar, Xitami, Monkey,
-		   Abyss, Robin hood, LiteServe, fnord, Stronghold.
-
-		   Platforms from a conference slide by Rasmus:
-		   Apache module (UNIX,Win32), CGI/FastCGI, thttpd, fhttpd,
-		   phttpd, ISAPI (IIS, Zeus), NSAPI (Netscape iPlanet), Java
-		   servlet, AOLServer, Roxen/Caudium module,
-		   Script Running Machine.
-
-		   These servers might be non-PHP related:
-		   Enterprise, Cougar, WebObjects, Oracle_Web_listener, Zope. */
-
-		$server_softwares = array('Apache'        => 'apache',
-		                          'Microsoft-IIS' => 'iis',
-		                          'Microsoft-PWS' => 'pws',
-		                          'Xitami'        => 'xitami',
-		                          'Zeus'          => 'zeus',
-		                          'OmniHTTPd'     => 'omnihttpd');
-
-		foreach ($server_softwares as $key=>$value)
+		function webserver_($server_software)
 		{
-			if (str_contains_($key, $server_software))
+			$server_softwares = array('Apache'        => 'apache',
+									  'Microsoft-IIS' => 'iis',
+									  'Microsoft-PWS' => 'pws',
+									  'Xitami'        => 'xitami',
+									  'Zeus'          => 'zeus',
+									  'OmniHTTPd'     => 'omnihttpd');
+
+			foreach ($server_softwares as $key=>$value)
 			{
-				return $value;
+				if (str_contains_($key, $server_software))
+				{
+					return $value;
+				}
 			}
+
+			return 'unknown';
 		}
 
-		return 'unknown';
-	}
+		function require_webserver_adapter_($webserver_adapter)
+		{
+			if (file_exists($webserver_adapter)) require_once $webserver_adapter;
+		}
+
+			function webserver_adapter_($webserver)
+			{//TODO: delete port line
+				return INERTIA_INSTALL_DIR.'core'.DIRECTORY_SEPARATOR.'adapters'.DIRECTORY_SEPARATOR.$webserver.'.adapter.php';
+			}
 
 
 	function webserver_specific_()
