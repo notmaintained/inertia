@@ -68,14 +68,17 @@
 	{
 		$params = func_get_args();
 		$func = array_shift($params);
-		return call_user_func_array(select_function_($func, INERTIA_WEB_SERVER), $params);
+		return call_user_func_array(select_function_(INERTIA_WEB_SERVER, $func), $params);
 	}
-		function select_function_($func, $webserver)
+		function select_function_($webserver, $func)
 		{
-			if (($selected_func = function_exists_("{$webserver}_{$func}")) or
-				 ($selected_func = "default_{$func}"))
+			if ($selected_func = function_exists_("{$webserver}_{$func}"))
 			{
 				return $selected_func;
+			}
+			else
+			{
+				return "default_{$func}";
 			}
 		}
 
