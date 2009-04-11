@@ -26,9 +26,8 @@
  *-------10--------20--------30--------40--------50--------60---------72
  */
 
-	// remove retest.test.php asserts
 	// display asserts using user_defined_function so that you can show functions that don't have tests.
-    // Show count of executable lines
+	// Show count of executable lines
 	// test output for following case: no test files, no tests function, no source
 	// write an error handler to capture count of error so that the count of failures is reflective of what actually is
 
