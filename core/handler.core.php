@@ -29,28 +29,7 @@
 
 
 
-	function handler_basedir_($dir=NULL)
-	{
-		static $handlers_dir;
-
-		if (is_null($dir))
-		{
-			if (isset($handlers_dir))
-			{
-				return $handlers_dir;
-			}
-			else
-			{
-				return INERTIA_INSTALL_DIR.'handlers'.DIRECTORY_SEPARATOR;
-			}
-		}
-		else
-		{
-			$dir = rtrim($dir, DIRECTORY_SEPARATOR);
-			$handlers_dir = $dir.DIRECTORY_SEPARATOR;
-			return $handlers_dir;
-		}
-	}
+	define('INERTIA_HANDLERS_DIR', INERTIA_INSTALL_DIR.'handlers'.DIRECTORY_SEPARATOR);
 
 
 	function handler_info_($handler)
@@ -59,7 +38,7 @@
 		$parts = explode(DIRECTORY_SEPARATOR, $handler);
 		$handler_basename = array_pop($parts);
 		$handler_path = empty($parts) ? '' : implode(DIRECTORY_SEPARATOR, $parts).DIRECTORY_SEPARATOR;
-		$handler_dir = handler_basedir_().$handler_path.$handler_basename.DIRECTORY_SEPARATOR;
+		$handler_dir = INERTIA_HANDLERS_DIR.$handler_path.$handler_basename.DIRECTORY_SEPARATOR;
 		return array('dir'=>$handler_dir, 'basename'=>$handler_basename);
 	}
 

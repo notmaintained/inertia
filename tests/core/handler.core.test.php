@@ -1,34 +1,19 @@
 <?php
 
-	function test_handler_basedir_()
-	{
-		$basedir = handler_basedir_();
-
-        should_return(realpath('../handlers').DIRECTORY_SEPARATOR);
-        
-		$path = DIRECTORY_SEPARATOR.'foo'.DIRECTORY_SEPARATOR.'bar';        
-		should_return($path.DIRECTORY_SEPARATOR, when_passed($path));
-		should_return($path.DIRECTORY_SEPARATOR, when_passed($path.DIRECTORY_SEPARATOR));
-        should_return($path.DIRECTORY_SEPARATOR);
-		
-		handler_basedir_($basedir);
-	}
-
-
 	function test_handler_info_()
 	{
-		should_return(array('dir'=>handler_basedir_().'foo'.DIRECTORY_SEPARATOR.'bar'.DIRECTORY_SEPARATOR, 'basename'=>'bar'),
+		should_return(array('dir'=>INERTIA_HANDLERS_DIR.'foo'.DIRECTORY_SEPARATOR.'bar'.DIRECTORY_SEPARATOR, 'basename'=>'bar'),
 		              when_passed('foo/bar'));
-		should_return(array('dir'=>handler_basedir_().'foo'.DIRECTORY_SEPARATOR, 'basename'=>'foo'),
+		should_return(array('dir'=>INERTIA_HANDLERS_DIR.'foo'.DIRECTORY_SEPARATOR, 'basename'=>'foo'),
 		              when_passed('foo'));
 	}
 
 
 	function test_handler_file_()
 	{
-		should_return(handler_basedir_().'foo'.DIRECTORY_SEPARATOR.'foo.handler.php', when_passed('foo'));
-		should_return(handler_basedir_().'foo'.DIRECTORY_SEPARATOR.'bar'.DIRECTORY_SEPARATOR.'bar.handler.php', when_passed('foo/bar'));
-        should_return(handler_basedir_().'foo-bar'.DIRECTORY_SEPARATOR.'foo-bar.handler.php', when_passed('foo-bar'));
+		should_return(INERTIA_HANDLERS_DIR.'foo'.DIRECTORY_SEPARATOR.'foo.handler.php', when_passed('foo'));
+		should_return(INERTIA_HANDLERS_DIR.'foo'.DIRECTORY_SEPARATOR.'bar'.DIRECTORY_SEPARATOR.'bar.handler.php', when_passed('foo/bar'));
+        should_return(INERTIA_HANDLERS_DIR.'foo-bar'.DIRECTORY_SEPARATOR.'foo-bar.handler.php', when_passed('foo-bar'));
 	}
 
 
@@ -47,20 +32,20 @@
 		should_return(false, when_passed($handler));
 
 		testhelper_create_handler_($handler);
-		should_return(handler_basedir_().$handler.DIRECTORY_SEPARATOR."$handler.handler.php", when_passed($handler));
+		should_return(INERTIA_HANDLERS_DIR.$handler.DIRECTORY_SEPARATOR."$handler.handler.php", when_passed($handler));
 		
         testhelper_remove_handler_($handler);
 	}
 		function testhelper_create_handler_($handler)
 		{
-			mkdir(handler_basedir_().$handler.DIRECTORY_SEPARATOR);
-			touch(handler_basedir_().$handler.DIRECTORY_SEPARATOR."$handler.handler.php");
+			mkdir(INERTIA_HANDLERS_DIR.$handler.DIRECTORY_SEPARATOR);
+			touch(INERTIA_HANDLERS_DIR.$handler.DIRECTORY_SEPARATOR."$handler.handler.php");
 		}
 		
 		function testhelper_remove_handler_($handler)
 		{
-			unlink(handler_basedir_().$handler.DIRECTORY_SEPARATOR."$handler.handler.php");
-			rmdir(handler_basedir_().$handler.DIRECTORY_SEPARATOR);
+			unlink(INERTIA_HANDLERS_DIR.$handler.DIRECTORY_SEPARATOR."$handler.handler.php");
+			rmdir(INERTIA_HANDLERS_DIR.$handler.DIRECTORY_SEPARATOR);
 		}
 
 

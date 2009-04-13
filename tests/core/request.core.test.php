@@ -13,9 +13,9 @@
 	function test_calling_handler_()
 	{
 		should_return('bar', when_passed(array(array('function'=>'foo'),
-		                                       array('function'=>'bar_handler'))));
+		                                       array('function'=>'bar_handler', 'args'=>array('GET', '/', array(), array(), '')))));
 		should_return('foo_bar', when_passed(array(array('function'=>'foo'),
-		                                           array('function'=>'foo_bar_handler'))));
+		                                           array('function'=>'foo_bar_handler', 'args'=>array('GET', '/', array(), array(), '')))));
 		should_return(false, when_passed(array(array('function'=>'foo'),
 		                                       array('function'=>'bar'))));
 	}
@@ -23,7 +23,7 @@
 
 	function test_get_conf_()
 	{
-        $conf_file = handler_basedir_().'testconf'.rand().'.conf.php';
+        $conf_file = INERTIA_HANDLERS_DIR.'testconf'.rand().'.conf.php';
         $conf_var = 'testconf'; 
         
         should_return(array(), when_passed($conf_var));
@@ -176,7 +176,7 @@
         
             function testhelper_write_handler_function_($handler)
             {
-                file_put_contents(handler_basedir_().$handler.DIRECTORY_SEPARATOR."$handler.handler.php", '<?php function '.$handler.'_handler($method, $path, $query, $headers, $body) {} ?>');
+                file_put_contents(INERTIA_HANDLERS_DIR.$handler.DIRECTORY_SEPARATOR."$handler.handler.php", '<?php function '.$handler.'_handler($method, $path, $query, $headers, $body) {} ?>');
             }
         
         function test_prepend_path_with_slash_()

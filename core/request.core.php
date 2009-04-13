@@ -53,10 +53,10 @@
 		$headers = array_change_key_case($headers, CASE_LOWER);
 		$headers = x_inertia_headers_($referer, $method, $headers, $body);
         
-        $proxies = get_conf_('proxies', proxies_conf_file_(handler_basedir_()));
+        $proxies = get_conf_('proxies', proxies_conf_file_(INERTIA_HANDLERS_DIR));
         list($handler, $path) = detect_proxy_($referer, $handler, $path, $proxies);
 
-        $aliases = get_conf_('aliases', aliases_conf_file_(handler_basedir_()));
+        $aliases = get_conf_('aliases', aliases_conf_file_(INERTIA_HANDLERS_DIR));
 		$handler = resolve_alias_($handler, $aliases);
         
         return dispatch_request_($handler, $method, $path, $query, $headers, $body);
@@ -67,7 +67,10 @@
 		{
 			foreach ($backtrace as $function_call)
 			{
-				if (preg_match('/^(\w+)_handler$/', $function_call['function'])/* and handler_exists_($matches[1])*/)
+				if (preg_match('/^(\w+)_handler$/', $function_call['function'])
+				    and is_equal_(count($function_call['args']), 5)
+				    and !isset($function_call['file'])
+				    and !isset($function_call['line']))
 				{
 					return preg_replace('/^(\w+)_handler$/', '\1', $function_call['function']);
 				}
