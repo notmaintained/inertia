@@ -124,9 +124,7 @@
         function inertia_test_page_()
         {
             $title = 'Inertia Test Page';
-            $content = "<h1>$title</h1>\n<p>If you can see this page, it means that "
-                       ."the installation of <a href=\"http://inertia.sourceforge.net/\">Inertia</a> "
-                       ."on this system was successful.</p>";
+            $content = "<h1>$title</h1>\n<p><a href=\"http://sandeepshetty.github.com/inertia/\">Inertia</a> has been successfully installed on this system!</p>";
             return minimal_html_($title, $content);
         }
         

@@ -36,13 +36,12 @@
 		{
 			should_return(array(), when_passed(array('path_'=>'/foo')));
 		}
-    
+
         function test_inertia_default_response_()
         {
         	$handler = 'testhandler'.rand();
             $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
-                    ."<html>\n<head>\n<title>Inertia Test Page</title>\n</head>\n<body>\n<h1>Inertia Test Page</h1>\n<p>If you can see this page, it means that the installation of <a href=\"http://inertia.sourceforge.net/\">Inertia</a> on this system was successful.</p>\n</body>\n</html>";
-
+                    ."<html>\n<head>\n<title>Inertia Test Page</title>\n</head>\n<body>\n<h1>Inertia Test Page</h1>\n<p><a href=\"http://sandeepshetty.github.com/inertia/\">Inertia</a> has been successfully installed on this system!</p>\n</body>\n</html>";
 			should_return(response_(STATUS_OK, array('content-type'=>'text/html'), $html), when_passed('/', ''));
 
 
@@ -55,7 +54,7 @@
         function test_inertia_test_page_()
         {
             $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
-                    ."<html>\n<head>\n<title>Inertia Test Page</title>\n</head>\n<body>\n<h1>Inertia Test Page</h1>\n<p>If you can see this page, it means that the installation of <a href=\"http://inertia.sourceforge.net/\">Inertia</a> on this system was successful.</p>\n</body>\n</html>";
+                    ."<html>\n<head>\n<title>Inertia Test Page</title>\n</head>\n<body>\n<h1>Inertia Test Page</h1>\n<p><a href=\"http://sandeepshetty.github.com/inertia/\">Inertia</a> has been successfully installed on this system!</p>\n</body>\n</html>";
 			should_return($html);
         }
         
