@@ -108,37 +108,39 @@
 			
 			return $query;
 		}
-    
-        function inertia_default_response_($path, $relative_uri)
-        {
-            if (is_equal_('/', $path))
-            {
-                return response_(STATUS_OK, array('content-type'=>'text/html'), inertia_test_page_());
-            }
-            else
-            {
-                return response_(STATUS_NOT_FOUND, array('content-type'=>'text/html'), inertia_404_not_found_($relative_uri));
-            }
-        }
 
-        function inertia_test_page_()
-        {
-            $title = 'Inertia Test Page';
-            $content = "<h1>$title</h1>\n<p><a href=\"http://sandeepshetty.github.com/inertia/\">Inertia</a> has been successfully installed on this system!</p>";
-            return minimal_html_($title, $content);
-        }
-        
-        function inertia_404_not_found_($relative_uri)
-        {
-            $title = '404 Not Found';
-            $content = "<h1>Not Found</h1>\n<p>The requested URL $relative_uri"
-                       ." was not found on this server.</p>";
-            return minimal_html_($title, $content);
-        }
-            function minimal_html_($title, $content)
-            {
-                return "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
-			           ."<html>\n<head>\n<title>$title</title>\n</head>\n<body>\n$content\n</body>\n</html>";
-            }
+		function inertia_default_response_($path, $relative_uri)
+		{
+			if (is_equal_('/', $path))
+			{
+				return response_(STATUS_OK, array('content-type'=>'text/html'), inertia_test_page_());
+			}
+			else
+			{
+				return response_(STATUS_NOT_FOUND, array('content-type'=>'text/html'), inertia_404_not_found_($relative_uri));
+			}
+		}
+
+		function inertia_test_page_()
+		{
+			$title = 'Inertia Test Page';
+			$content = "<h1>$title</h1>\n"
+			           ."<p><a href=\"http://sandeepshetty.github.com/inertia/\">Inertia</a> has been successfully installed on this system!</p>"
+			           ."<p><a href=\"tests/retest.php\">Run all tests</a> and confirm everything passes before you proceed.</p>";
+			return minimal_html_($title, $content);
+		}
+		
+		function inertia_404_not_found_($relative_uri)
+		{
+			$title = '404 Not Found';
+			$content = "<h1>Not Found</h1>\n<p>The requested URL $relative_uri"
+					   ." was not found on this server.</p>";
+			return minimal_html_($title, $content);
+		}
+			function minimal_html_($title, $content)
+			{
+				return "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
+					   ."<html>\n<head>\n<title>$title</title>\n</head>\n<body>\n$content\n</body>\n</html>";
+			}
 
 ?>

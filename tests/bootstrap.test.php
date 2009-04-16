@@ -39,9 +39,10 @@
 
         function test_inertia_default_response_()
         {
-        	$handler = 'testhandler'.rand();
-            $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
-                    ."<html>\n<head>\n<title>Inertia Test Page</title>\n</head>\n<body>\n<h1>Inertia Test Page</h1>\n<p><a href=\"http://sandeepshetty.github.com/inertia/\">Inertia</a> has been successfully installed on this system!</p>\n</body>\n</html>";
+			$html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
+			        ."<html>\n<head>\n<title>Inertia Test Page</title>\n</head>\n<body>\n<h1>Inertia Test Page</h1>\n"
+			        ."<p><a href=\"http://sandeepshetty.github.com/inertia/\">Inertia</a> has been successfully installed on this system!</p>"
+			        ."<p><a href=\"tests/retest.php\">Run all tests</a> and confirm everything passes before you proceed.</p>\n</body>\n</html>";
 			should_return(response_(STATUS_OK, array('content-type'=>'text/html'), $html), when_passed('/', ''));
 
 
@@ -51,13 +52,15 @@
         }
 
 
-        function test_inertia_test_page_()
-        {
-            $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
-                    ."<html>\n<head>\n<title>Inertia Test Page</title>\n</head>\n<body>\n<h1>Inertia Test Page</h1>\n<p><a href=\"http://sandeepshetty.github.com/inertia/\">Inertia</a> has been successfully installed on this system!</p>\n</body>\n</html>";
+		function test_inertia_test_page_()
+		{
+			$html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
+			        ."<html>\n<head>\n<title>Inertia Test Page</title>\n</head>\n<body>\n<h1>Inertia Test Page</h1>\n"
+			        ."<p><a href=\"http://sandeepshetty.github.com/inertia/\">Inertia</a> has been successfully installed on this system!</p>"
+			        ."<p><a href=\"tests/retest.php\">Run all tests</a> and confirm everything passes before you proceed.</p>\n</body>\n</html>";
 			should_return($html);
-        }
-        
+		}
+
         function test_inertia_404_not_found_()
         {
             $html = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
